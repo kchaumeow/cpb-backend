@@ -1,6 +1,6 @@
-import { client } from "../graphql";
+import { client } from "./graphql";
 import { gql } from "graphql-request";
-import { ProductDTO } from "../types";
+import { ProductDTO } from "./types";
 const getProductsquery = gql`
   {
     products(first: 4) {
@@ -18,6 +18,6 @@ const getProductsquery = gql`
     }
   }
 `;
-export async function getProducts(): Promise<ProductDTO> {
+export async function getProductsFromShopify(): Promise<ProductDTO> {
   return await client.request(getProductsquery);
 }

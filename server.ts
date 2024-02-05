@@ -5,14 +5,13 @@ dotenv.config();
 const app = express();
 const port = 3000;
 app.use(cors());
-import { getProducts } from "./apiProducts/getProducts";
-import { loadProductsToDb } from "./apiProducts/loadProductsDb";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { getProductsFromShopify } from "./shopifyApi";
+import { loadProductsToDb } from "./db/loadProductsDb";
+import { clearDatabase } from "./db/clearDb";
+import { getAllProductsFromDb } from "./db/productsService";
 
 app.get("/", async (req, res) => {
-  const products = await getProducts();
+  const products = await getProductsFromShopify();
   res.send(products);
 });
 
@@ -22,10 +21,17 @@ async function main() {
     console.log(`Example app listening on port ${port}`);
   });
 
-  server.close(() => {
-    prisma["product"].deleteMany();
-    prisma["image"].deleteMany();
-  });
+  process.on("SIGTERM", shutDown);
+  process.on("SIGINT", shutDown);
+
+  function shutDown() {
+    server.close(clearDatabase);
+  }
 }
+
+app.get("/products", async (req, res) => {
+  const products = await getAllProductsFromDb();
+  res.send(products);
+});
 
 main();

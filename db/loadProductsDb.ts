@@ -1,10 +1,8 @@
-import { getProducts } from "./getProducts";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { getProductsFromShopify } from "../shopifyApi";
+import { prisma } from "../prisma/prismaClient";
 
 export async function loadProductsToDb() {
-  const products = (await getProducts()).products;
+  const products = (await getProductsFromShopify()).products;
 
   await prisma.product.createMany({
     data: products.edges.map((product) => {
@@ -16,7 +14,6 @@ export async function loadProductsToDb() {
   });
   products.edges.map(async (product) => {
     const sources = getImages(product);
-    console.log(sources);
     await prisma.image.createMany({
       data: sources.map((source: { src: string }) => {
         return {
