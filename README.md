@@ -16,7 +16,10 @@ npm install
 
 ```bash
 npm run migrate
+<<<<<<< HEAD
 npm run prisma
+=======
+>>>>>>> cdfce5dfd84a780de0105d8899cb6f2b3722191c
 ```
 
 Подробнее в документации Prisma: https://www.prisma.io/docs
