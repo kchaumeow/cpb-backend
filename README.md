@@ -19,6 +19,7 @@ npm install
 ```bash
 npm run migrate
 ```
+Подробнее в документации Prisma: https://www.prisma.io/docs
 
 ## Запустить проект
 
@@ -26,4 +27,4 @@ npm run migrate
 npm run dev
 ```
 
-Подробнее в документации Prisma: https://www.prisma.io/docs
+
