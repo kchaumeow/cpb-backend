@@ -11,15 +11,19 @@ npm install
 ## Прописать файл .env
 
 Пример в файле **.env.example**
+Внимательно! Надо заменить user, password, port, db_name, access_token, your_shop.
+Базу данных самостоятельно создавать не нужно, она создаётся сама.
 
 ## Запустить миграции
 
 ```bash
 npm run migrate
-<<<<<<< HEAD
-npm run prisma
-=======
->>>>>>> cdfce5dfd84a780de0105d8899cb6f2b3722191c
+```
+
+## Запустить проект
+
+```bash
+npm run dev
 ```
 
 Подробнее в документации Prisma: https://www.prisma.io/docs
