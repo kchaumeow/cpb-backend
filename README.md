@@ -15,7 +15,8 @@ npm install
 ## Запустить миграции
 
 ```bash
-npx prisma migrate dev --name init
+npm run migrate
+npm run prisma
 ```
 
 Подробнее в документации Prisma: https://www.prisma.io/docs

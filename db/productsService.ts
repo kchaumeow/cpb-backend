@@ -10,3 +10,22 @@ export async function getAllProductsFromDb() {
   }
   return records;
 }
+
+export async function getProductById(id: string) {
+  const product = await prisma.product.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  const image = await prisma.image.findFirst({
+    where: {
+      productId: id,
+    },
+  });
+
+  return {
+    product,
+    image,
+  };
+}

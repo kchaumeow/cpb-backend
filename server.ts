@@ -8,7 +8,7 @@ app.use(cors());
 import { getProductsFromShopify } from "./shopifyApi";
 import { loadProductsToDb } from "./db/loadProductsDb";
 import { clearDatabase } from "./db/clearDb";
-import { getAllProductsFromDb } from "./db/productsService";
+import { getAllProductsFromDb, getProductById } from "./db/productsService";
 
 app.get("/", async (req, res) => {
   const products = await getProductsFromShopify();
@@ -32,6 +32,11 @@ async function main() {
 app.get("/products", async (req, res) => {
   const products = await getAllProductsFromDb();
   res.send(products);
+});
+
+app.get("/product-by-id", async (req, res) => {
+  const prodId = req.query.id!.toString();
+  res.send(await getProductById(prodId));
 });
 
 main();
